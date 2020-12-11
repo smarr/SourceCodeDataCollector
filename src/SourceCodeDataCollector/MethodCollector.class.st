@@ -9,7 +9,9 @@ Class {
 
 { #category : #'as yet unclassified' }
 MethodCollector >> collectDataFromMethod: aMethod [
-	| method |
+	| method ast |
+	ast := aMethod ast.
+	
 	method := MethodModel new
 		id: self methodId;
 		name: aMethod selector;
@@ -17,6 +19,9 @@ MethodCollector >> collectDataFromMethod: aMethod [
 		protocol: aMethod protocol;
 		sourceCode: aMethod sourceCode;
 		linesOfCode: aMethod linesOfCode;
+		numArgs: ast argumentNames size;
+		numLocals: ast temporaryNames size;
+		numLiterals: aMethod numLiterals;
 		tokens: aMethod tokens;
 		tokenTypes: aMethod tokenTypes;
 		subtokens: aMethod subtokens;

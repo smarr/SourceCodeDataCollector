@@ -28,6 +28,11 @@ DataCollector >> allWordsFileIn: aDirectory [
 ]
 
 { #category : #'as yet unclassified' }
+DataCollector >> classesFileIn: aDirectory [
+	^ aDirectory / 'classes.csv'
+]
+
+{ #category : #'as yet unclassified' }
 DataCollector >> collectMethods [ 
 	self subclassResponsibility
 ]
@@ -37,6 +42,13 @@ DataCollector >> createAndSaveAllWordsTableFrom: aCollectionOfProjectModels into
 	| table |
 	table := self tableBuilder allWordsTableFrom: aCollectionOfProjectModels.
 	self writeTable: table toCsv: (self allWordsFileIn: aDirectory).
+]
+
+{ #category : #'as yet unclassified' }
+DataCollector >> createAndSaveClassesTableFrom: aCollectionOfProjectModels into: aDirectory [
+	| table |
+	table := self tableBuilder classesTableFrom: aCollectionOfProjectModels.
+	self writeTable: table toCsv: (self classesFileIn: aDirectory).
 ]
 
 { #category : #'as yet unclassified' }
@@ -79,6 +91,7 @@ DataCollector >> createAndSaveTablesFrom: aCollectionOfProjectModels into: aDire
 	self createAndSaveSubtokensTableFrom: aCollectionOfProjectModels into: aDirectory.
 	self createAndSaveWordsTableFrom: aCollectionOfProjectModels into: aDirectory.
 	self createAndSaveAllWordsTableFrom: aCollectionOfProjectModels into: aDirectory.
+	self createAndSaveClassesTableFrom: aCollectionOfProjectModels into: aDirectory.
 ]
 
 { #category : #'as yet unclassified' }

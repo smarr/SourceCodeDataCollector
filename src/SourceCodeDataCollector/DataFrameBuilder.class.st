@@ -26,8 +26,35 @@ DataFrameBuilder >> allWordsTableFrom: projectModels [
 ]
 
 { #category : #'instance creation' }
+DataFrameBuilder >> classesTableColumnNames [
+	^ #(project package class numDirectInstVars numClassVars numTotalInstVars numSuperclasses isTestClass) 
+]
+
+{ #category : #'instance creation' }
+DataFrameBuilder >> classesTableFrom: projectModels [
+	| rows |
+	rows := projectModels flatCollect: [ :projectModel |
+		projectModel packages flatCollect: [ :packageModel |
+			packageModel classes collect: [ :classModel |
+				{
+					projectModel name .
+					packageModel name .
+					classModel name .
+					classModel numDirectInstVars.
+					classModel numClassVars.
+					classModel numTotalInstVars.
+					classModel numSuperclasses.
+					classModel isTestCase
+				} ] ] ] .
+	
+	^ DataFrame
+		withRows: rows
+		columnNames: self classesTableColumnNames.
+]
+
+{ #category : #'instance creation' }
 DataFrameBuilder >> methodsTableColumnNames [
-	^ #(id project package class protocol selector linesOfCode isTestClass) 
+	^ #(id project package class protocol selector linesOfCode numArgs numLocals numLiterals isTestClass) 
 ]
 
 { #category : #'instance creation' }
@@ -44,6 +71,9 @@ DataFrameBuilder >> methodsTableFrom: projectModels [
 					methodModel protocol .
 					methodModel name .
 					methodModel linesOfCode .
+					methodModel numArgs.
+					methodModel numLocals.
+					methodModel numLiterals.
 					methodModel isTestClass
 				} ] ] ] .
 	

@@ -8,6 +8,9 @@ Class {
 		'protocol',
 		'sourceCode',
 		'linesOfCode',
+		'numArgs',
+		'numLocals',
+		'numLiterals',
 		'tokens',
 		'tokenTypes',
 		'subtokens',
@@ -76,6 +79,42 @@ MethodModel >> name [
 { #category : #accessing }
 MethodModel >> name: anObject [
 	name := anObject
+]
+
+{ #category : #accessing }
+MethodModel >> numArgs [
+	^ numArgs
+]
+
+{ #category : #accessing }
+MethodModel >> numArgs: anInt [
+	numArgs := anInt
+
+]
+
+{ #category : #accessing }
+MethodModel >> numLiterals [
+	^ numLiterals
+
+]
+
+{ #category : #accessing }
+MethodModel >> numLiterals: anInt [
+	numLiterals := anInt
+
+
+]
+
+{ #category : #accessing }
+MethodModel >> numLocals [
+	^ numLocals
+
+]
+
+{ #category : #accessing }
+MethodModel >> numLocals: anInt [
+	numLocals := anInt
+
 ]
 
 { #category : #accessing }
