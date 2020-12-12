@@ -139,6 +139,7 @@ MethodModel >> sourceCode: anObject [
 
 { #category : #accessing }
 MethodModel >> subtokens [
+	subtokens ifNil: [ ^ #() ].
 	^ subtokens
 ]
 
@@ -149,6 +150,7 @@ MethodModel >> subtokens: anObject [
 
 { #category : #accessing }
 MethodModel >> tokenTypes [
+	tokenTypes ifNil: [ ^ #() ].
 	^ tokenTypes
 ]
 
@@ -159,6 +161,7 @@ MethodModel >> tokenTypes: anObject [
 
 { #category : #accessing }
 MethodModel >> tokens [
+	tokens ifNil: [ ^ #() ].
 	^ tokens
 ]
 
@@ -169,6 +172,7 @@ MethodModel >> tokens: anObject [
 
 { #category : #accessing }
 MethodModel >> words [
+	words ifNil: [ ^ #() ].
 	^ words
 ]
 

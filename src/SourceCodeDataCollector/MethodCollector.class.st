@@ -9,8 +9,18 @@ Class {
 
 { #category : #'as yet unclassified' }
 MethodCollector >> collectDataFromMethod: aMethod [
-	| method ast |
-	ast := aMethod ast.
+	| method numArgs numLocals tokens tokenTypes subtokens words |
+	numArgs := numLocals := 0.
+	[ | ast |
+	  ast := aMethod ast.
+	  tokens := aMethod tokens.
+	  numArgs := ast argumentNames size.
+	  numLocals := ast temporaryNames size.
+	  tokenTypes := aMethod tokenTypes.
+	  subtokens := aMethod subtokens.
+	  words := aMethod wordsFromIdentifierNames.
+	 ] on: SyntaxErrorNotification do: [: e | e return: 1  ].
+	
 	
 	method := MethodModel new
 		id: self methodId;
@@ -19,13 +29,13 @@ MethodCollector >> collectDataFromMethod: aMethod [
 		protocol: aMethod protocol;
 		sourceCode: aMethod sourceCode;
 		linesOfCode: aMethod linesOfCode;
-		numArgs: ast argumentNames size;
-		numLocals: ast temporaryNames size;
+		numArgs: numArgs;
+		numLocals: numLocals;
 		numLiterals: aMethod numLiterals;
-		tokens: aMethod tokens;
-		tokenTypes: aMethod tokenTypes;
-		subtokens: aMethod subtokens;
-		words: aMethod wordsFromIdentifierNames;
+		tokens: tokens;
+		tokenTypes: tokenTypes;
+		subtokens: subtokens;
+		words: words;
 		allWords: aMethod wordsFromSourceCode;
 		isTestClass: aMethod methodClass isTestCase.
 		
